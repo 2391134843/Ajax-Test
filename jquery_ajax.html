@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 新浪cdn方便使用 -->
+    <script src="http://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js">
+    </script>
+    <script type="text/javascript">
+        function  f1() {//四个参数，分别用逗号分开
+            $.get(
+                "/ajaxServlet2", //1、url地址
+                {
+                    "name":"zhangsan","age":25  //2、请求参数
+                },
+                function (date) {//3、执行成功后的回调函数
+                    alert(date);
+                },
+                "text"//4、返回参数的类型
+            );
+        }
+        function f2() {
+            $.post(
+               "/ajaxServlet2",// url
+                {
+                    "name":"zhangsan","age":25  //2、请求参数
+                },
+                function (date) {
+                    alert(date.name)
+                },
+                "json"
+            );
+        }
+        function f3() {
+            $.ajax({
+                url:"/ajaxServlet2", //路径
+                async:true,//是否异步，可以不设置，默认为异步，
+                type:"POST",//传递的方式
+                data:{"name":"lucy","age":18},//需要传递的数据
+                success:function (data) {//执行成功后执行的函数
+                    alert(data.name)
+                },
+                error:function () {//执行失败后返回的函数
+                    alert("请求失败")
+                },
+                dataType:"json"//返回数据的类型
+            })
+        }
+    </script>
+</head>
+<body>
+<input type="button" value="GET访问服务器端" onclick="f1()">
+<input type="button" value="GET访问服务器端2" onclick="f2()">
+<input type="button" value="AJAX范文服务器3" onclick="f3()">
+</body>
+</html>
