@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原生Js的Ajax</title>
+    <script type="text/javascript">
+        function fn1() {
+            //1.创建ajax引擎对象 ---所有操作都是通过引擎对象
+            var xmlHTTP =new XMLHttpRequest();
+            //2.绑定监听 ---监听自己服务器是否已经返回数据
+            xmlHTTP.onreadystatechange = function () {
+                //5.接受相应的数据
+                if (xmlHTTP.readyState==4&&xmlHTTP.status==200) {
+                    var res = xmlHTTP.responseText;
+                    // alert(res);
+                    document.getElementById("span1").innerHTML=res;
+                }
+            }
+            //3.绑定地址
+            xmlHTTP.open("GET", '/ajaxServlet?name="zhang san feng', true);
+            //4.发送请求
+            xmlHTTP.send();
+        }
+        function fn2() {
+            //1.创建ajax引擎对象 ---所有操作都是通过引擎对象
+            var xmlHTTP =new XMLHttpRequest();
+            //2.绑定监听 ---监听自己服务器是否已经返回数据
+            xmlHTTP.onreadystatechange = function () {
+                //5.接受相应的数据
+                if (xmlHTTP.readyState==4&&xmlHTTP.status==200) {
+                    var res = xmlHTTP.responseText;
+                    // alert(res);
+                    document.getElementById("span2").innerHTML=res;
+                }
+            }
+            //3.绑定地址
+            xmlHTTP.open("GET", '/ajaxServlet?name=lisi', false);
+            //4.发送请求
+            xmlHTTP.send();
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="异步访问服务器" onclick="fn1()">
+    <span id="span1">1</span>
+    <hr>
+    <input type="button" value="同步访问服务器" onclick="fn2()">
+    <span id="span2">1</span><hr>
+    <input type="button" value="测试按钮" onclick="alert()">
+</body>
+</html>
